@@ -204,3 +204,42 @@ public class CalculatorTest {
     }
 }
 ```
+### Using Data Providers
+- add `junit-jupiter-params` dependency in pom.xml
+- reload maven project
+```xml
+  <dependency>
+  <groupId>org.junit.jupiter</groupId>
+  <artifactId>junit-jupiter-params</artifactId>
+  <version>5.10.1</version>
+  <scope>test</scope>
+  </dependency>
+```
+
+- Create Test data
+```java
+import java.util.stream.Stream;
+
+public class DataProviders {
+    public static Stream<Object[]> dataProviderForAdd() {
+        return Stream.of(
+                new Object[]{1, 2, 3},
+                new Object[]{0, 0, 0},
+                new Object[]{-1, 1, 0}
+        );
+    }
+}
+```
+
+- Use Test data
+```java
+public class CalculatorTest {
+
+    @ParameterizedTest
+    @MethodSource("DataProviders#dataProviderForAdd")
+    public void testAddWithDataProvider(int a, int b, int expected) {
+        Calculator calculator = new Calculator();
+        assertEquals(expected, calculator.add(a, b));
+    }
+}
+```
