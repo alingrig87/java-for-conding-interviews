@@ -1,4 +1,4 @@
-# Java Algo
+# Java For Coding Interviews
 
 The project is dedicated to those who want to learn and write basic algorithms in Java.
 
